@@ -6,15 +6,7 @@ const languages = [
     { code: 'de', name: '🇩🇪', colorClass: 'german', bgColor: 'lightgray' }
 ];
 
-// Array di parole italiane casuali per l'apprendimento
-const randomItalianWords = [
-    'libro', 'sole', 'mare', 'casa', 'amore', 
-    'tempo', 'notte', 'giorno', 'parola', 'numero',
-    'colore', 'musica', 'arte', 'scuola', 'lavoro',
-    'amico', 'famiglia', 'città', 'natura', 'viaggio'
-];
-
-// Recupero i componenti dalla pagina html
+// Recupero i componenti dalla pagina html  
 const languageButtonsContainer = document.querySelector('.language-buttons');
 const textInput = document.querySelector('.text-input');
 const translationText = document.querySelector('.translation-text');
@@ -34,6 +26,11 @@ let currentTranslation = {
     language: '',
     flag: ''
 };
+
+// Funzione per pulire il testo da tag HTML
+function cleanText(text) {
+    return text.replace(/<br\s*\/?>/gi, '').trim();
+}
 
 // Genera i pulsanti delle lingue dinamicamente
 function generateLanguageButtons() {
@@ -99,10 +96,16 @@ async function translate(text, lang, flag) {
     }
 }
 
-// Ottiene una parola casuale in italiano
-function getRandomItalianWord() {
-    const randomIndex = Math.floor(Math.random() * randomItalianWords.length);
-    return randomItalianWords[randomIndex];
+// Ottiene una parola casuale in italiano usando l'API
+async function getRandomItalianWord() {
+    try {
+        const response = await fetch("https://random-word-api.herokuapp.com/word?lang=it");
+        const data = await response.json();
+        return data[0]; // L'API restituisce un array con una parola
+    } catch (error) {
+        console.error('Error fetching random word:', error);
+        return 'ciao'; // Parola di fallback in caso di errore
+    }
 }
 
 // Ottiene una lingua casuale dall'array languages
@@ -113,7 +116,7 @@ function getRandomLanguage() {
 
 // Traduci una parola casuale in una lingua casuale
 async function translateRandomWord() {
-    const randomWord = getRandomItalianWord();
+    const randomWord = await getRandomItalianWord();
     const randomLang = getRandomLanguage();
     
     textInput.value = randomWord;
@@ -202,8 +205,8 @@ renderFavorites();
 
 // Event listeners
 resetButton.addEventListener('click', reset);
-randomWordButton.addEventListener('click', () => {
-    textInput.value = getRandomItalianWord();
+randomWordButton.addEventListener('click', async () => {
+    textInput.value = await getRandomItalianWord();
 });
 randomTranslationButton.addEventListener('click', translateRandomWord);
 saveButton.addEventListener('click', saveFavorite);
