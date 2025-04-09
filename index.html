@@ -17,14 +17,23 @@
                     <div class="translation-result">
                         <p class="translation-text">Traduzione</p>
                     </div>
+                    <button class="save-button">❤️ Salva</button>
                 </section>
 
                 <section class="panel controls">
                     <input class="text-input" type="text" placeholder="Inserisci testo da tradurre">
-                    <button class="lang-button" data-lang="en">EN</button>
-                    <button class="lang-button" data-lang="fr">FR</button>
-                    <button class="lang-button" data-lang="es">ES</button>
-                    <button class="reset-button">X</button>
+                    <div class="language-buttons"></div>
+                    <div class="random-buttons">
+                        <button class="random-word-button">Parola Casuale</button>
+                        <button class="random-translation-button">Traduci Casuale</button>
+                    </div>
+                    <button class="reset-button">❌</button>
+                </section>
+
+                <section class="panel favorites-panel">
+                    <h2>Preferiti</h2>
+                    <div class="favorites-list"></div>
+                    <button class="clear-favorites-button">Pulisci Preferiti</button>
                 </section>
             </main>
         </div>

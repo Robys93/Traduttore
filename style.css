@@ -9,7 +9,7 @@ body {
     background-color: rgb(234, 237, 240);
 }
 
-h1 {
+h1, h2 {
     font-size: 21px;
     color: white;
     text-transform: uppercase;
@@ -47,11 +47,12 @@ header {
     background-color: rgb(70, 100, 242);
     padding: 16px;
     border-radius: 16px;
+    margin-bottom: 16px;
 }
 
 .translation {
     background-color: white;
-    margin-bottom: 16px;
+    position: relative;
 }
 
 .translation-result {
@@ -74,9 +75,99 @@ header {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 16px
+    gap: 16px;
 }
 
 .text-input {
     width: 100%;
+}
+
+.random-buttons {
+    display: flex;
+    gap: 16px;
+    width: 100%;
+}
+
+.random-word-button,
+.random-translation-button,
+.clear-favorites-button,
+.save-button {
+    flex: 1;
+    font-size: 16px !important;
+}
+
+.random-word-button,
+.random-translation-button {
+    background-color: rgb(255, 128, 176) !important;
+}
+
+.save-button {
+    background-color: rgb(255, 77, 77) !important;
+    width: 100%;
+    margin-top: 10px;
+    font-size: 18px !important;
+}
+
+.clear-favorites-button {
+    background-color: rgb(255, 77, 77) !important;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.english {
+    background-color: green;
+    color: white;
+}
+
+.french {
+    background-color: blue;
+    color: white;
+}
+
+.spanish {
+    background-color: red;
+    color: white;
+}
+
+.german {
+    background-color: black;
+    color: white;
+}
+
+.favorites-panel {
+    background-color: rgb(70, 100, 242);
+}
+
+.favorites-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.favorite-item {
+    background-color: white;
+    padding: 12px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.favorite-text {
+    font-size: 16px;
+}
+
+.favorite-flag {
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.favorite-delete {
+    background-color: rgb(255, 77, 77);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 4px 8px;
+    cursor: pointer;
+    font-size: 12px;
 }
