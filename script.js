@@ -157,6 +157,78 @@ function clearFavorites() {
     }
 }
 
+// ... (tutto il codice precedente rimane uguale fino alla funzione clearFavorites)
+
+// Funzione per mostrare lo snackbar
+function showSnackbar(message, actionText = null, actionHandler = null) {
+    const snackbar = document.createElement('div');
+    snackbar.className = 'snackbar';
+    snackbar.textContent = message;
+    
+    if (actionText && actionHandler) {
+        const actionButton = document.createElement('button');
+        actionButton.className = 'snackbar-action';
+        actionButton.textContent = actionText;
+        actionButton.addEventListener('click', () => {
+            actionHandler();
+            snackbar.remove();
+        });
+        snackbar.appendChild(actionButton);
+    }
+    
+    document.body.appendChild(snackbar);
+    
+    // Mostra lo snackbar
+    setTimeout(() => {
+        snackbar.classList.add('show');
+    }, 10);
+    
+    // Nascondi e rimuovi lo snackbar dopo 4 secondi
+    setTimeout(() => {
+        snackbar.classList.remove('show');
+        setTimeout(() => {
+            snackbar.remove();
+        }, 300);
+    }, 4000);
+}
+
+// Cancella tutti i preferiti (modificata per usare lo snackbar)
+function clearFavorites() {
+    if (getFavorites().length === 0) {
+        showSnackbar('Nessun preferito da cancellare');
+        return;
+    }
+
+    showSnackbar('Preferiti cancellati', 'Annulla', () => {
+        // Ripristina i preferiti (non implementato qui)
+        // Potresti voler salvare i preferiti prima di cancellarli
+        renderFavorites();
+    });
+    
+    // Procedi con la cancellazione
+    localStorage.removeItem('translationFavorites');
+    renderFavorites();
+}
+
+// Cancella un singolo preferito (modificata per usare lo snackbar)
+function deleteFavorite(id) {
+    const favorites = getFavorites();
+    const favoriteToDelete = favorites.find(fav => fav.id === id);
+    
+    showSnackbar(`Preferito eliminato: ${favoriteToDelete.original} → ${favoriteToDelete.translated}`, 'Annulla', () => {
+        // Ripristina il preferito
+        favorites.push(favoriteToDelete);
+        localStorage.setItem('translationFavorites', JSON.stringify(favorites));
+        renderFavorites();
+    });
+    
+    // Procedi con l'eliminazione
+    const updatedFavorites = favorites.filter(fav => fav.id !== id);
+    localStorage.setItem('translationFavorites', JSON.stringify(updatedFavorites));
+    renderFavorites();
+}
+
+
 // Cancella un singolo preferito
 function deleteFavorite(id) {
     const favorites = getFavorites();

@@ -170,3 +170,46 @@ header {
     cursor: pointer;
     font-size: 12px;
 }
+
+/* Stile per lo snackbar */
+.snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 4px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1000;
+    left: 50%;
+    bottom: 30px;
+    font-size: 14px;
+    opacity: 0;
+    transition: opacity 0.3s ease, bottom 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.snackbar.show {
+    visibility: visible;
+    opacity: 1;
+    bottom: 50px;
+}
+
+.snackbar-action {
+    margin-left: 15px;
+    color: #4CAF50;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 5px 10px;
+}
+
+.snackbar-action:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
